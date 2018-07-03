@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import TestData from './TestData.json'
-import TestIcon from './TestIcon.png'
-import './main.css'
+import EmptyDailyData from '../EmptyDailyData.json'
+import TestIcon from '../TestIcon.png'
+import '../main.css'
 
 import axios from 'axios'; 
 
-class OpenWeatherTest extends Component {
+class CurrentWeather extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            zipCode: 55418,
-            apiResponse: TestData
+            zipCode: '',
+            apiResponse: EmptyDailyData
         }
     }
 
@@ -30,31 +30,21 @@ class OpenWeatherTest extends Component {
         })
     }
 
-    // getWeatherIcon = (iconCode) => {
-    //     axios.get(`http://openweathermap.org/img/w/${iconCode}.png`)
-    //     .then((response) => {
-    //         console.log('successful GET of weather Icon');
-    //         this.setState({
-    //             weatherIcon: response.data
-    //         })
-    //     })
-    //     .catch((error) => {
-    //         console.log('error in Icon');
-    //     })
-    // }
-
-
     handleChangeZip = (event) => {
         this.setState({
             zipCode: event.target.value        
         })
     }
 
+    componentDidMount () {
+        // this.getWeather ()
+    }
 
   render() {
     const {apiResponse} = this.state
-    let sunrise = (new Date (apiResponse.sys.sunrise * 1000)).toLocaleString();
-    let sunset = (new Date (apiResponse.sys.sunset * 1000)).toLocaleString();
+    let sunrise = apiResponse.sys.sunrise ? (new Date (apiResponse.sys.sunrise * 1000)).toLocaleString() : '';
+    let sunset = apiResponse.sys.sunset ?  (new Date (apiResponse.sys.sunset * 1000)).toLocaleString(): '';
+    let weatherIcon = apiResponse.weather[0].icon ? `http://openweathermap.org/img/w/${apiResponse.weather[0].icon}.png` : ''; 
 
     return (
       <div className="OpenWeatherTest">
@@ -66,12 +56,12 @@ class OpenWeatherTest extends Component {
                     onChange = {this.handleChangeZip}
                     value={this.state.zipCode}/>
             <button onClick={this.getWeather}>Make the Call</button>
-
+            
             <h2>City: {apiResponse.name}</h2>
             <h3>Current Temp: {apiResponse.main.temp} {String.fromCharCode(8457)}</h3>
             <span>
                 <h3>Current Weather: {apiResponse.weather[0].main}</h3>
-                <img src={TestIcon} alt=""/>
+                <img src={weatherIcon} alt=""/>
             </span>
             <h4>Daily Low: {apiResponse.main.temp_min} {String.fromCharCode(8457)}</h4>
             <h4>Daily High: {apiResponse.main.temp_max} {String.fromCharCode(8457)}</h4>
@@ -84,4 +74,4 @@ class OpenWeatherTest extends Component {
 }
 
 
-export default OpenWeatherTest;
+export default CurrentWeather;
