@@ -1,6 +1,6 @@
 ## A test-run of the OpenWeatherMap API
 
-My API skills are OK but could be better so:
+Soon I would like to start poking around the Spotify API. My API skills are OK but could be better so I thought I'd start with a simple weather app:
 
 ## Goals: 
 Keep my Axios skills polished. 

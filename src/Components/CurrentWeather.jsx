@@ -49,7 +49,7 @@ class CurrentWeather extends Component {
     return (
       <div className="OpenWeatherTest">
         <h1>What's The Weather Right Now?</h1>
-        <pre id="jsonPrint">{JSON.stringify(this.state, null, 2)}</pre>
+        <pre className="jsonPrint">{JSON.stringify(this.state, null, 2)}</pre>
         <div>
             <input type="number" 
                     name="zipCode" 
