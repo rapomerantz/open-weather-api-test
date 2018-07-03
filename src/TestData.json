@@ -1,0 +1,42 @@
+{
+    "coord": {
+        "lon": -93.22,
+        "lat": 45.03
+    },
+    "weather": [
+        {
+            "id": 521,
+            "main": "Rain",
+            "description": "shower rain",
+            "icon": "09d"
+        }
+    ],
+    "base": "stations",
+    "main": {
+        "temp": 73.4,
+        "pressure": 1017,
+        "humidity": 78,
+        "temp_min": 71.6,
+        "temp_max": 77
+    },
+    "visibility": 16093,
+    "wind": {
+        "speed": 9.17,
+        "deg": 150
+    },
+    "clouds": {
+        "all": 1
+    },
+    "dt": 1530639300,
+    "sys": {
+        "type": 1,
+        "id": 3013,
+        "message": 0.0113,
+        "country": "US",
+        "sunrise": 1530613897,
+        "sunset": 1530669761
+    },
+    "id": 420019309,
+    "name": "Minneapolis",
+    "cod": 200
+}
