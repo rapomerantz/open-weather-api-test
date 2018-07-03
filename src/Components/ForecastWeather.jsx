@@ -13,11 +13,12 @@ export default class ForecastWeather extends Component {
                 [], //0 mon
                 [], //1 tues
                 [], //2 wed
-                [],  //3 thurs
-                [],  //4 fri
+                [], //3 thurs
+                [], //4 fri
                 [], //5 sat
                 [], //6 sun
-            ]
+            ],
+            selectedDay: 1
         }
     }
 
@@ -27,9 +28,25 @@ export default class ForecastWeather extends Component {
         })
     }
 
+    handleSelectedDay = (selectedDay) => () => {
+        console.log(selectedDay);
+        this.setState({
+            selectedDay: selectedDay,
+            dailyData: [
+                [], //0 mon
+                [], //1 tues
+                [], //2 wed
+                [], //3 thurs
+                [], //4 fri
+                [], //5 sat
+                [], //6 sun
+            ]
+        })
+        
+    }
+
 
   render() {
-    let resultObject = {}; 
     let dateArray = TestForecastData.list.map((item) => {
         let dateFormatOptions = { weekday: 'long', month: 'long', day: 'numeric'};
         let timeFormatOptions = {hour: '2-digit' };
@@ -38,47 +55,53 @@ export default class ForecastWeather extends Component {
         let weatherIcon = `http://openweathermap.org/img/w/${item.weather[0].icon}.png`
         let weatherDescription = item.weather[0].description; 
         let temperature = (item.main.temp).toFixed()
-        // let rain = item.rain ? item.rain[0] : 0;
+        return {
+            date: formattedDate,
+            time: formattedTime,
+            icon: weatherIcon, 
+            weatherDescription: weatherDescription,
+            temperature: temperature
+        }
+    })
+
+    dateArray.forEach(element => {
+        if (element.date.startsWith('Mon')) {
+            this.state.dailyData[0].push(element)
+        } 
+        else if (element.date.startsWith('Tue')) {
+            this.state.dailyData[1].push(element)
+        }
+        else if (element.date.startsWith('Wed')) {
+            this.state.dailyData[2].push(element)
+        }
+        else if (element.date.startsWith('Thu')) {
+            this.state.dailyData[3].push(element)
+        }
+        else if (element.date.startsWith('Fri')) {
+            this.state.dailyData[4].push(element)
+        }
+        else if (element.date.startsWith('Sat')) {
+            this.state.dailyData[5].push(element)
+        }
+        else if (element.date.startsWith('Sun')) {
+            this.state.dailyData[6].push(element)
+        }
+    });
+
+    let dataForTable = this.state.dailyData[this.state.selectedDay].map((item) => {
         return (
-            <tr key={formattedDate + Math.random()}>
-                <td>{formattedDate}</td>
-                <td>{formattedTime}</td>
-                <td><img src={weatherIcon} alt=""/></td>
-                <td>{weatherDescription}</td>
-                <td>{temperature}</td>
+            <tr key={item.date + Math.random()}>
+                <td>{item.date}</td>
+                <td>{item.time}</td>
+                <td><img src={item.icon} alt=""/></td>
+                <td>{item.weatherDescription}</td>
+                <td>{item.temperature}</td>
                 <td>??</td> 
             </tr>
         )
     })
 
-
-    for (let i = 0; i < dateArray.length; i++) {
-        let dateArrayRow = dateArray[i].props.children
-        let weekdayMonthDate = dateArrayRow[0].props.children
-        if (weekdayMonthDate.startsWith('Mon')) {
-            this.state.dailyData[0].push(dateArrayRow)
-        } 
-        else if (weekdayMonthDate.startsWith('Tue')) {
-            this.state.dailyData[1].push(dateArrayRow)
-        }
-        else if (weekdayMonthDate.startsWith('Wed')) {
-            this.state.dailyData[2].push(dateArrayRow)
-        }
-        else if (weekdayMonthDate.startsWith('Thu')) {
-            this.state.dailyData[3].push(dateArrayRow)
-        }
-        else if (weekdayMonthDate.startsWith('Fri')) {
-            this.state.dailyData[4].push(dateArrayRow)
-        }
-        else if (weekdayMonthDate.startsWith('Sat')) {
-            this.state.dailyData[5].push(dateArrayRow)
-        }
-        else if (weekdayMonthDate.startsWith('Sun')) {
-            this.state.dailyData[6].push(dateArrayRow)
-        }
-    }
     console.log(this.state.dailyData);
-    
     
 
 
@@ -90,7 +113,17 @@ export default class ForecastWeather extends Component {
         <button onClick={this.toggleShowJson}>Show JSON</button>
         {this.state.showJson ? <pre className="jsonPrint">{JSON.stringify(TestForecastData, null, 2)}</pre> : ''}
         <h1>Forecast Weather</h1>
+        {/* <pre>{JSON.stringify(this.state.dailyData, null, 2)}</pre> */}
         <h2>{currentDate} - {TestForecastData.city.name}</h2>
+
+        <button onClick={this.handleSelectedDay(0)}>Monday</button>
+        <button onClick={this.handleSelectedDay(1)}>Tuesday</button>
+        <button onClick={this.handleSelectedDay(2)}>Wednesday</button>
+        <button onClick={this.handleSelectedDay(3)}>Thursday</button>
+        <button onClick={this.handleSelectedDay(4)}>Friday</button>
+        <button onClick={this.handleSelectedDay(5)}>Saturday</button>
+        <button onClick={this.handleSelectedDay(6)}>Sunday</button>
+        
         <div id="tableContainer">
             <table>
                 <thead>
@@ -104,7 +137,7 @@ export default class ForecastWeather extends Component {
                     </tr>
                 </thead>
                 <tbody>
-                    {dateArray}
+                    {dataForTable}
                 </tbody>
             </table>
         </div>
