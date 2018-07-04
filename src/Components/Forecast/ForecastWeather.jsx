@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import TestForecastData from './TestForecastData.json'
 import geolocationFunction from '../Functions/geolocationFunction'
-import DaySelectDropdown from './DaySelectDropdown.js'
+import DaySelectDropdown from './DaySelectDropdown.jsx'
 
 import {Table, Jumbotron, Well, Button, ButtonGroup} from 'react-bootstrap'; 
 import './ForecastWeather.css'
@@ -10,19 +10,10 @@ import './ForecastWeather.css'
 export default class ForecastWeather extends Component {
     constructor(props) {
         super(props) 
-
         this.state = {
             showJson: false,
-            dailyData: [ 
-                [], //0 mon
-                [], //1 tues
-                [], //2 wed
-                [], //3 thurs
-                [], //4 fri
-                [], //5 sat
-                [], //6 sun
-            ],
-            selectedDay: 2
+            selectedDay: '',
+            currentTime: ''
         }
     }
 
@@ -35,16 +26,21 @@ export default class ForecastWeather extends Component {
     handleSelectDay = (selectedDay) => {
         this.setState({
             selectedDay: selectedDay,
-            dailyData: [
-                [], //0 mon
-                [], //1 tues
-                [], //2 wed
-                [], //3 thurs
-                [], //4 fri
-                [], //5 sat
-                [], //6 sun
-            ]
         })
+    }
+
+    findCurrentTime = () => {
+        let dateOptions = {weekday: 'long', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'}
+        let date = new Date().toLocaleString(window.navigator.language, dateOptions)
+        let currentWeekday = date.substring(0, 3)
+        this.setState({
+            currentTime: date,
+            selectedDay: currentWeekday
+        })
+    }
+
+    componentDidMount () {
+        this.findCurrentTime(); 
     }
 
   render() {
@@ -57,56 +53,17 @@ export default class ForecastWeather extends Component {
         let weatherIcon = `http://openweathermap.org/img/w/${item.weather[0].icon}.png`
         let weatherDescription = item.weather[0].description; 
         let temperature = (item.main.temp).toFixed()
-        return {
-            date: formattedDate,
-            time: formattedTime,
-            icon: weatherIcon, 
-            weatherDescription: weatherDescription,
-            temperature: temperature
+        if (formattedDate.startsWith(this.state.selectedDay)) {
+            return (
+                <tr key={formattedDate + Math.random()}>
+                    <td>{formattedDate}</td>
+                    <td>{formattedTime}</td>
+                    <td>{weatherDescription}<img src={weatherIcon} alt=""/></td>
+                    <td>{temperature}</td>
+                </tr>
+            )
         }
     })
-
-    dateArray.forEach(element => {
-        if (element.date.startsWith('Mon')) {
-            this.state.dailyData[0].push(element)
-        } 
-        else if (element.date.startsWith('Tue')) {
-            this.state.dailyData[1].push(element)
-        }
-        else if (element.date.startsWith('Wed')) {
-            this.state.dailyData[2].push(element)
-        }
-        else if (element.date.startsWith('Thu')) {
-            this.state.dailyData[3].push(element)
-        }
-        else if (element.date.startsWith('Fri')) {
-            this.state.dailyData[4].push(element)
-        }
-        else if (element.date.startsWith('Sat')) {
-            this.state.dailyData[5].push(element)
-        }
-        else if (element.date.startsWith('Sun')) {
-            this.state.dailyData[6].push(element)
-        }
-    });
-
-    let dataForTable = this.state.dailyData[this.state.selectedDay].map((item) => {
-        return (
-            <tr key={item.date + Math.random()}>
-                <td><span>{item.date}</span></td>
-                <td><span>{item.time}</span></td>
-                <td><p>{item.weatherDescription}<img src={item.icon} alt=""/></p></td>
-                <td><span>{item.temperature}</span></td>
-                {/* <td>??</td>  */}
-            </tr>
-        )
-    })
-
-    console.log(this.state.dailyData);
-    
-    
-
-    let currentDate = new Date().toLocaleString(window.navigator.language, {weekday: 'long', month: 'long', day: 'numeric', hour: '2-digit'})
 
 
     return (
@@ -119,8 +76,9 @@ export default class ForecastWeather extends Component {
 
 
         <Jumbotron id='ForecastJumbotron'>
-            <h1>Forecast Weather</h1>
-            <h2>{currentDate} - {TestForecastData.city.name}</h2>
+            <h1>Your Weather Forecast</h1>
+            <h2>{TestForecastData.city.name}</h2>
+            <h2>{this.state.currentTime && this.state.currentTime}</h2>
         </Jumbotron>
         <div id='tableWrapper'>
             <Well>
@@ -139,7 +97,7 @@ export default class ForecastWeather extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {dataForTable}
+                            {dateArray}
                         </tbody>
                     </Table>
                 </div>
