@@ -1,18 +1,19 @@
 // @import '../../App.scss'; 
 
 #forecast {
-    height: 100em; 
-    margin: 0em 4em;
-    padding: 2em; 
+    margin: 0em 7em;
+    padding: 2em 4em; 
     background-color: whitesmoke;
     border-radius: 10px; 
     font-size: 14px; 
     font-family: 'Roboto', sans-serif;
 
     Button {
-        background: white;
+        @extend th; 
+        background: inherit !important;
         box-shadow: none; 
-        width: 11em;  
+        // border: none; 
+        // width: 11em;  
     }
 }
 
@@ -27,7 +28,7 @@ table {
     width: 90%;
     
     tr{
-        vertical-align: bottom !important;
+        vertical-align: middle !important;
         text-align: center;
         font-size: 1.1em; 
 
@@ -37,6 +38,7 @@ table {
         }
         td {
             @extend tr;
+            padding: .5em auto;
         }
     
         img {

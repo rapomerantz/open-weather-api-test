@@ -22,7 +22,7 @@ export default class ForecastWeather extends Component {
                 [], //5 sat
                 [], //6 sun
             ],
-            selectedDay: 1
+            selectedDay: 2
         }
     }
 
@@ -93,11 +93,10 @@ export default class ForecastWeather extends Component {
     let dataForTable = this.state.dailyData[this.state.selectedDay].map((item) => {
         return (
             <tr key={item.date + Math.random()}>
-                <td><p>{item.date}</p></td>
-                <td><p>{item.time}</p></td>
-                <td><img src={item.icon} alt=""/></td>
-                <td><p>{item.weatherDescription}</p></td>
-                <td><p>{item.temperature}</p></td>
+                <td><span>{item.date}</span></td>
+                <td><span>{item.time}</span></td>
+                <td><p>{item.weatherDescription}<img src={item.icon} alt=""/></p></td>
+                <td><span>{item.temperature}</span></td>
                 {/* <td>??</td>  */}
             </tr>
         )
@@ -124,20 +123,18 @@ export default class ForecastWeather extends Component {
             <h2>{currentDate} - {TestForecastData.city.name}</h2>
         </Jumbotron>
         <div id='tableWrapper'>
-
-            <DaySelectDropdown title = 'select day'
-                               handleSelectDay={this.handleSelectDay}/>
-
             <Well>
                 <div id="tableContainer">
                     <Table striped condensed>
                         <thead>
                             <tr>
-                                <th>Day</th>
-                                <th>Time</th>
-                                <th>Icon</th>
-                                <th>Description</th>
-                                <th>Temp.</th>
+                                <th><DaySelectDropdown title = 'Select Day'
+                                                        handleSelectDay={this.handleSelectDay}
+                                                        />
+                                </th>
+                                <th><Button>Time</Button></th>
+                                <th><Button>Description</Button></th>
+                                <th><Button>Temp.</Button></th>
                                 {/* <th>Precip.</th> */}
                             </tr>
                         </thead>

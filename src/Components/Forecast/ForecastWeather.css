@@ -1,15 +1,13 @@
 #forecast {
-  height: 100em;
-  margin: 0em 4em;
-  padding: 2em;
+  margin: 0em 7em;
+  padding: 2em 4em;
   background-color: whitesmoke;
   border-radius: 10px;
   font-size: 14px;
   font-family: 'Roboto', sans-serif; }
   #forecast Button {
-    background: white;
-    box-shadow: none;
-    width: 11em; }
+    background: inherit !important;
+    box-shadow: none; }
 
 #ForecastJumbotron {
   padding: 1em 2em 2em 2.5em;
@@ -18,10 +16,12 @@
 table {
   border-collapse: collapse;
   width: 90%; }
-  table tr, table tr th, table tr td {
-    vertical-align: bottom !important;
+  table tr, table tr th, table tr #forecast Button, #forecast table tr Button, table tr td {
+    vertical-align: middle !important;
     text-align: center;
     font-size: 1.1em; }
-    table tr img {
+    table tr td, table tr #forecast Button td, #forecast table tr Button td {
+      padding: .5em auto; }
+    table tr img, table tr #forecast Button img, #forecast table tr Button img {
       padding: 0;
       margin: 0; }
