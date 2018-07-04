@@ -1,21 +1,31 @@
 #forecast {
   margin: 0em 7em;
-  padding: 2em 4em;
+  padding: 3em 4em 2em 4em;
   background-color: whitesmoke;
   border-radius: 10px;
   font-size: 14px;
-  font-family: 'Roboto', sans-serif; }
+  font-family: 'Hind', sans-serif; }
   #forecast Button {
     background: inherit !important;
     box-shadow: none; }
 
-#ForecastJumbotron {
-  padding: 1em 2em 2em 2.5em;
-  margin: 0 0 2em 0; }
+#forecastWell header {
+  margin: 1em 1em 3em 1em; }
+  #forecastWell header h1 {
+    margin: .1em 0em;
+    letter-spacing: 1px; }
+  #forecastWell header h2 {
+    margin: .2em 0em;
+    font-size: 24px;
+    letter-spacing: .6px; }
+
+#tableContainer {
+  margin: 0; }
 
 table {
   border-collapse: collapse;
-  width: 90%; }
+  width: 90%;
+  margin: 0; }
   table tr, table tr th, table tr #forecast Button, #forecast table tr Button, table tr td {
     vertical-align: middle !important;
     text-align: center;

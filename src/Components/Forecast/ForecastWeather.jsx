@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import TestForecastData from './TestForecastData.json'
-import geolocationFunction from '../Functions/geolocationFunction'
+// import geolocationFunction from '../Functions/geolocationFunction'
+import findUserLocation from '../Functions/geolocationFunction'
 import DaySelectDropdown from './DaySelectDropdown.jsx'
 
 import {Table, Jumbotron, Well, Button, ButtonGroup} from 'react-bootstrap'; 
 import './ForecastWeather.css'
+import userLocation from '../Functions/geolocationFunction';
 
 
 export default class ForecastWeather extends Component {
@@ -13,7 +15,11 @@ export default class ForecastWeather extends Component {
         this.state = {
             showJson: false,
             selectedDay: '',
-            currentTime: ''
+            currentTime: '', 
+            userPosition: {
+                lat: '',
+                lng: ''
+            }
         }
     }
 
@@ -41,7 +47,9 @@ export default class ForecastWeather extends Component {
 
     componentDidMount () {
         this.findCurrentTime(); 
+  
     }
+
 
   render() {
 
@@ -69,19 +77,17 @@ export default class ForecastWeather extends Component {
     return (
     <div id="forecast">
 
-
             {/* <button onClick={this.toggleShowJson}>Show JSON</button> */}
             {/* {this.state.showJson ? <pre className="jsonPrint">{JSON.stringify(TestForecastData, null, 2)}</pre> : ''} */}
             {/* <pre>{JSON.stringify(this.state.dailyData, null, 2)}</pre> */}
 
-
-        <Jumbotron id='ForecastJumbotron'>
-            <h1>Your Weather Forecast</h1>
-            <h2>{TestForecastData.city.name}</h2>
-            <h2>{this.state.currentTime && this.state.currentTime}</h2>
-        </Jumbotron>
         <div id='tableWrapper'>
-            <Well>
+            <Well id="forecastWell">
+            <header>
+                <h1>Your Weather Forecast</h1>
+                <h2>{TestForecastData.city.name}</h2>
+                <h2>{this.state.currentTime && this.state.currentTime}</h2>
+            </header>
                 <div id="tableContainer">
                     <Table striped condensed>
                         <thead>
