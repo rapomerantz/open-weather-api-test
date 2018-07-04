@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import EmptyDailyData from '../EmptyDailyData.json'
-import TestIcon from '../TestIcon.png'
-import '../main.css'
+import EmptyDailyData from './EmptyDailyData.json'
+import TestIcon from './TestIcon.png'
+import './CurrentWeather.css'
 
 import axios from 'axios'; 
 

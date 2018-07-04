@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import CurrentWeather from './CurrentWeather.jsx'
-import ForecastWeather from './ForecastWeather.jsx'
+import CurrentWeather from '../Components/Current/CurrentWeather.jsx'
+import ForecastWeather from '../Components/Forecast/ForecastWeather.jsx'
 
 
 class OpenWeatherTest extends Component {

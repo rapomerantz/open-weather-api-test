@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import TestForecastData from '../TestForecastData.json'
-import geolocationFunction from './geolocationFunction.js'
+import TestForecastData from './TestForecastData.json'
+import geolocationFunction from '../Functions/geolocationFunction'
 
-import '../main.css'
+import './ForecastWeather.css'
 
 export default class ForecastWeather extends Component {
     constructor(props) {
@@ -10,7 +10,7 @@ export default class ForecastWeather extends Component {
 
         this.state = {
             showJson: false,
-            dailyData: [
+            dailyData: [ 
                 [], //0 mon
                 [], //1 tues
                 [], //2 wed
@@ -48,7 +48,7 @@ export default class ForecastWeather extends Component {
 
 
   render() {
-      
+
     let dateArray = TestForecastData.list.map((item) => {
         let dateFormatOptions = { weekday: 'long', month: 'long', day: 'numeric'};
         let timeFormatOptions = {hour: '2-digit' };
@@ -98,7 +98,7 @@ export default class ForecastWeather extends Component {
                 <td><img src={item.icon} alt=""/></td>
                 <td>{item.weatherDescription}</td>
                 <td>{item.temperature}</td>
-                <td>??</td> 
+                {/* <td>??</td>  */}
             </tr>
         )
     })
@@ -111,38 +111,40 @@ export default class ForecastWeather extends Component {
 
     let currentDate = new Date().toLocaleString(window.navigator.language, {weekday: 'long', month: 'long', day: 'numeric', hour: '2-digit'})
     return (
-      <div>
-        <button onClick={this.toggleShowJson}>Show JSON</button>
-        {this.state.showJson ? <pre className="jsonPrint">{JSON.stringify(TestForecastData, null, 2)}</pre> : ''}
+        <div id="forecast">
         <h1>Forecast Weather</h1>
-        {/* <pre>{JSON.stringify(this.state.dailyData, null, 2)}</pre> */}
         <h2>{currentDate} - {TestForecastData.city.name}</h2>
+      <div id='tableWrapper'>
+            {/* <button onClick={this.toggleShowJson}>Show JSON</button> */}
+            {this.state.showJson ? <pre className="jsonPrint">{JSON.stringify(TestForecastData, null, 2)}</pre> : ''}
+            {/* <pre>{JSON.stringify(this.state.dailyData, null, 2)}</pre> */}
 
-        <button onClick={this.handleSelectedDay(0)}>Monday</button>
-        <button onClick={this.handleSelectedDay(1)}>Tuesday</button>
-        <button onClick={this.handleSelectedDay(2)}>Wednesday</button>
-        <button onClick={this.handleSelectedDay(3)}>Thursday</button>
-        <button onClick={this.handleSelectedDay(4)}>Friday</button>
-        <button onClick={this.handleSelectedDay(5)}>Saturday</button>
-        <button onClick={this.handleSelectedDay(6)}>Sunday</button>
-        
-        <div id="tableContainer">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Day</th>
-                        <th>Time</th>
-                        <th>Icon</th>
-                        <th>Description</th>
-                        <th>Temp.</th>
-                        <th>Precip.</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {dataForTable}
-                </tbody>
-            </table>
-        </div>
+            <button onClick={this.handleSelectedDay(0)}>Monday</button>
+            <button onClick={this.handleSelectedDay(1)}>Tuesday</button>
+            <button onClick={this.handleSelectedDay(2)}>Wednesday</button>
+            <button onClick={this.handleSelectedDay(3)}>Thursday</button>
+            <button onClick={this.handleSelectedDay(4)}>Friday</button>
+            <button onClick={this.handleSelectedDay(5)}>Saturday</button>
+            <button onClick={this.handleSelectedDay(6)}>Sunday</button>
+            
+            <div id="tableContainer">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Day</th>
+                            <th>Time</th>
+                            <th>Icon</th>
+                            <th>Description</th>
+                            <th>Temp.</th>
+                            {/* <th>Precip.</th> */}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {dataForTable}
+                    </tbody>
+                </table>
+            </div>
+      </div>
       </div>
     )
   }

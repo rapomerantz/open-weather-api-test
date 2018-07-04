@@ -3,7 +3,7 @@ function geo_success(position) {
     console.log(position.coords.latitude, position.coords.longitude);
   } 
 function geo_error() {
-alert("Sorry, no position available.");
+ console.log('No position available!');
 }
 let geo_options = {
 // enableHighAccuracy: true, 

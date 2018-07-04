@@ -1,0 +1,37 @@
+.jsonPrint {
+  float: right;
+  margin: 0;
+  padding: 0; }
+
+#forecast {
+  height: 100em;
+  margin: 0 4em;
+  /* border: 1px solid tomato;  */
+  padding: 2em;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  font-size: 14px; }
+
+#tableWrapper {
+  /* border: 2px solid plum;  */
+  background-color: rgba(112, 128, 144, 0.159);
+  padding: 5em 5em; }
+
+#tableContainer {
+  width: 75%;
+  background-color: whitesmoke;
+  /* margin-left: 10%;  */
+  /* padding: 1em 1em;  */ }
+
+table {
+  border-collapse: collapse;
+  width: 90%;
+  /* margin: 0 0 0 3.5em;  */ }
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd; }
+
+tr:hover {
+  background-color: #dfdede72; }
