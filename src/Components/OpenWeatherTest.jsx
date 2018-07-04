@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import CurrentWeather from '../Components/Current/CurrentWeather.jsx'
 import ForecastWeather from '../Components/Forecast/ForecastWeather.jsx'
 
+import '../App.css'
+
 
 class OpenWeatherTest extends Component {
   constructor(props) {
