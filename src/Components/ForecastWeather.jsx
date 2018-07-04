@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import TestForecastData from '../TestForecastData.json'
+import geolocationFunction from './geolocationFunction.js'
 
 import '../main.css'
 
@@ -47,6 +48,7 @@ export default class ForecastWeather extends Component {
 
 
   render() {
+      
     let dateArray = TestForecastData.list.map((item) => {
         let dateFormatOptions = { weekday: 'long', month: 'long', day: 'numeric'};
         let timeFormatOptions = {hour: '2-digit' };
@@ -103,11 +105,11 @@ export default class ForecastWeather extends Component {
 
     console.log(this.state.dailyData);
     
+    
 
-
+    
 
     let currentDate = new Date().toLocaleString(window.navigator.language, {weekday: 'long', month: 'long', day: 'numeric', hour: '2-digit'})
-    
     return (
       <div>
         <button onClick={this.toggleShowJson}>Show JSON</button>
