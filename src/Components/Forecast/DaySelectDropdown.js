@@ -3,19 +3,17 @@ import {DropdownButton, MenuItem} from 'react-bootstrap';
 
 
 export default class DaySelectDropdown extends Component {
-
   handleDropdownSelect = (selectedDay) => {
     this.props.handleSelectDay(selectedDay)
 
   }
-
   render() {
     return (
       <div>
         <DropdownButton
-          bsStyle={this.props.title.toLowerCase()}
+          // bsStyle={this.props.title.toLowerCase()}
           title={this.props.title}
-          key={this.props.key}
+          key={this.props.title}
           id={`dropdown-basic-${this.props.title}`}
           onSelect = {this.handleDropdownSelect}
           >

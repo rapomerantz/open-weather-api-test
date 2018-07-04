@@ -93,11 +93,11 @@ export default class ForecastWeather extends Component {
     let dataForTable = this.state.dailyData[this.state.selectedDay].map((item) => {
         return (
             <tr key={item.date + Math.random()}>
-                <td>{item.date}</td>
-                <td>{item.time}</td>
+                <td><p>{item.date}</p></td>
+                <td><p>{item.time}</p></td>
                 <td><img src={item.icon} alt=""/></td>
-                <td>{item.weatherDescription}</td>
-                <td>{item.temperature}</td>
+                <td><p>{item.weatherDescription}</p></td>
+                <td><p>{item.temperature}</p></td>
                 {/* <td>??</td>  */}
             </tr>
         )
@@ -112,18 +112,21 @@ export default class ForecastWeather extends Component {
 
     return (
     <div id="forecast">
+
+
+            {/* <button onClick={this.toggleShowJson}>Show JSON</button> */}
+            {/* {this.state.showJson ? <pre className="jsonPrint">{JSON.stringify(TestForecastData, null, 2)}</pre> : ''} */}
+            {/* <pre>{JSON.stringify(this.state.dailyData, null, 2)}</pre> */}
+
+
         <Jumbotron id='ForecastJumbotron'>
             <h1>Forecast Weather</h1>
             <h2>{currentDate} - {TestForecastData.city.name}</h2>
         </Jumbotron>
         <div id='tableWrapper'>
-            {/* <button onClick={this.toggleShowJson}>Show JSON</button> */}
-            {/* {this.state.showJson ? <pre className="jsonPrint">{JSON.stringify(TestForecastData, null, 2)}</pre> : ''} */}
-            {/* <pre>{JSON.stringify(this.state.dailyData, null, 2)}</pre> */}
 
-            <DaySelectDropdown title = 'Select Day'
-                                key = '1'
-                                handleSelectDay={this.handleSelectDay}/>
+            <DaySelectDropdown title = 'select day'
+                               handleSelectDay={this.handleSelectDay}/>
 
             <Well>
                 <div id="tableContainer">
